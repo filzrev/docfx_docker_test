@@ -1,2 +1,4 @@
-/api
-/_site
+/docs/api
+/docs/_site
+/src/**/obj
+/src/**/bin
