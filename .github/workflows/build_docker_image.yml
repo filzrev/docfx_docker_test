@@ -20,7 +20,7 @@ jobs:
 
       # Build docker image
       - run:
-          docker build ./ -t docfx
+          docker buildx ./ -t docfx
     
       # Output docker image size
       - run:
