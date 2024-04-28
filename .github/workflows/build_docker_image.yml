@@ -38,7 +38,7 @@ jobs:
       # Build docker image
       - run: >-
           docker buildx build
-          --tag docfx:latest
+          --tag docfx
           ./
 
       # --platform=linux/amd64,linux/arm64
@@ -50,7 +50,6 @@ jobs:
       # Run docfx command
       - run: >-
           docker run
-          --name docfx:latest
           --rm
           --volume ${{ github.workspace }}:/opt/prj
           docfx docs/docfx.json
