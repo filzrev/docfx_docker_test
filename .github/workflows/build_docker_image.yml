@@ -20,7 +20,7 @@ jobs:
 
       # Enable multi-platform build by Docker container build driver
       - run: |
-          docker buildx create --name multi-arch --platform linux/amd64,linux/arm64 --use
+          docker buildx create --name multi-arch --driver docker-container --platform linux/amd64,linux/arm64 --use
           docker buildx ls
           docker buildx inspect --builder multi-arch --bootstrap
 
