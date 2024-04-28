@@ -9,7 +9,7 @@ RUN dotnet tool update -g docfx && \
 
 RUN which docfx
 
-RUN find -name "/root/.dotnet/tools/.store/docfx/*/docfx/*/tools/net6.0/*" -type f -delete
+RUN find . -name "/root/.dotnet/tools/.store/docfx" -type f -delete
 
 # Install dependences for chromium PDF.
 RUN apt-get update -qq && \
