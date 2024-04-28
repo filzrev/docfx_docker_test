@@ -18,12 +18,12 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         with:
-          platforms: linux/arm64,linux/arm64
+          platforms: linux/amd64,linux/arm64
 
       - name: Set up Docker Buildx to rnable custom build by Docker container build driver
         uses: docker/setup-buildx-action@v3
         with:
-         platforms: linux/arm64,linux/arm64
+         platforms: linux/amd64,linux/arm64
 
       # Enable custom build by Docker container build driver
       - name: Setup docker container
