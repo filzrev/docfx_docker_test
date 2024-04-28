@@ -13,11 +13,11 @@ jobs:
       matrix:
         os: [ ubuntu-latest ]
     steps:
-      #
+      # Enable multi-platform build
       - run: |
-        docker buildx create --use --name multi-arch
-        docker buildx ls
-        docker buildx inspect --builder multi-arch --bootstrap
+          docker buildx create --use --name multi-arch
+          docker buildx ls
+          docker buildx inspect --builder multi-arch --bootstrap
 
       # Checkout
       - uses: actions/checkout@v4
@@ -28,7 +28,7 @@ jobs:
       # Build docker image
       - run: >-
           docker buildx build
-          --platform linux/x64,linux/arm64
+          --platform linux/x64,darwin-arm64
           --tag docfx:latest
           ./
     
