@@ -33,6 +33,10 @@ jobs:
         --volume ${{ github.workspace }}:/opt/prj
         docfx
 
+    - run: |
+        dir
+        dir _site
+
     - uses: actions/upload-artifact@v4
       if: ${{ matrix.os == 'ubuntu-latest' }}
       with:
