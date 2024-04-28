@@ -24,4 +24,3 @@ WORKDIR /opt/prj
 VOLUME [ "/opt/prj" ]
 
 ENTRYPOINT [ "docfx" ]
-CMD []

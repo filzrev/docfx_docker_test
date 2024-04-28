@@ -21,5 +21,7 @@ jobs:
         lfs: true
 
     - run: |
-        docker build ./ -t docfx --help
-        docker run docfx
+        docker build ./ -t docfx
+
+    - run: |
+        docker run docfx --help
