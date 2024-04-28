@@ -19,7 +19,8 @@ jobs:
         uses: docker/setup-qemu-action@v3
 
       # Enable multi-platform build by Docker container build driver
-      - run: |
+      - name: Setup docker container
+        run: |
           docker buildx create --name multi-arch --driver docker-container --platform linux/amd64,linux/arm64 --use
           docker buildx ls
           docker buildx inspect --builder multi-arch --bootstrap
@@ -31,7 +32,7 @@ jobs:
       - run: >-
           docker buildx build
           --builder=multi-arch
-          --platform=linux/x64,linux/arm64
+          --platform=linux/amd64,linux/arm64
           --tag docfx:latest
           ./
     
