@@ -6,7 +6,7 @@ ENV PATH="${PATH}:/root/.dotnet/tools"
 # Install DocFX as a dotnet tool.
 RUN dotnet tool update -g docfx && \
     echo $TARGETPLATFORM && \
-    echo $BUILDPLATFORM &&
+    echo $BUILDPLATFORM && \
     DOCFX_VERSION=$(docfx --version | cut -d '+' -f1) && \
     rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.nupkg                         && \
     rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.${DOCFX_VERSION}.nupkg        && \
