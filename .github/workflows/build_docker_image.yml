@@ -19,8 +19,11 @@ jobs:
       - uses: actions/checkout@v4
 
       # Build docker image
-      - run:
-          docker buildx build --platform linux/x64 ./ -t docfx
+      - run: >-
+          docker buildx build
+          --platform linux/x64
+          --tag docfx:latest
+          ./
     
       # Output docker image size
       - run:
@@ -29,7 +32,7 @@ jobs:
       # Run docfx command
       - run: >-
           docker run
-          --name docfx
+          --name docfx:latest
           --rm
           --volume ${{ github.workspace }}:/opt/prj
           docfx docs/docfx.json
