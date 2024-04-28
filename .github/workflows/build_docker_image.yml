@@ -31,7 +31,6 @@ jobs:
       # Build docker image
       - run: >-
           docker buildx build
-          --builder=multi-arch
           --platform=linux/amd64,linux/arm64
           --tag docfx:latest
           ./
