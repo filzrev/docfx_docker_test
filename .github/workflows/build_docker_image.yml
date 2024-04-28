@@ -27,7 +27,7 @@ jobs:
         docker images
 
     - run: |
-        docker run docfx build && docfx pdf -v ${PWD}:/opt/prj
+        docker run docfx build && docfx pdf -v `pwd`:`pwd` -w `pwd`
 
     - uses: actions/upload-artifact@v4
       if: ${{ matrix.os == 'ubuntu-latest' }}
