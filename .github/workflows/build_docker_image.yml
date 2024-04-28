@@ -25,6 +25,9 @@ jobs:
 
     - run: |
         docker images
+    
+    - run: |
+        dir
 
     - run: >-
         docker run
