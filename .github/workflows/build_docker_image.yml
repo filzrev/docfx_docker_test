@@ -26,11 +26,11 @@ jobs:
       #   platforms: linux/amd64,linux/arm64
 
       # Enable custom build by Docker container build driver
-      - name: Setup docker container
-        run: |
-          docker buildx create --name custom-builder --driver docker-container --platform linux/amd64,linux/arm64 --use --bootstrap
-          docker buildx inspect --builder custom-builder
-          docker buildx ls
+      #- name: Setup docker container
+      #  run: |
+      #    docker buildx create --name custom-builder --driver docker-container --platform linux/amd64,linux/arm64 --use --bootstrap
+      #    docker buildx inspect --builder custom-builder
+      #    docker buildx ls
 
       # Checkout
       - uses: actions/checkout@v4
