@@ -18,11 +18,11 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
-      # Enable multi-platform build
+      # Enable multi-platform build by Docker container build driver
       - run: |
-          # docker buildx create --use --name multi-arch --platform linux/amd64,linux/arm64
+          docker buildx create --name multi-arch --platform linux/amd64,linux/arm64 --use
           docker buildx ls
-          #docker buildx inspect --builder multi-arch --bootstrap
+          docker buildx inspect --builder multi-arch --bootstrap
 
       # Checkout
       - uses: actions/checkout@v4
@@ -30,7 +30,8 @@ jobs:
       # Build docker image
       - run: >-
           docker buildx build
-          --platform linux/x64,linux/arm64
+          --builder=multi-arch
+          --platform=linux/x64,linux/arm64
           --tag docfx:latest
           ./
     
