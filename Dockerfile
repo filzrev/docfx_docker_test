@@ -1,5 +1,7 @@
 FROM --platform=$TARGETPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim
 
+ARG TARGETPLATFORM
+
 # Add dotnet tools to path.
 ENV PATH="${PATH}:/root/.dotnet/tools"
 
