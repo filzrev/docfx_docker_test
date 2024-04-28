@@ -29,7 +29,7 @@ jobs:
     - run: |
         docker run docfx build && docfx pdf
     - uses: actions/upload-artifact@v4
-      if: ${{ failure() && matrix.os == 'ubuntu-latest' }}
+      if: ${{ matrix.os == 'ubuntu-latest' }}
       with:
         name: site
-        path: /_site/*
+        path: /_site/toc.pdf
