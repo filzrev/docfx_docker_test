@@ -5,6 +5,9 @@ on:
   push:
     branches: [ main, feature/*, hotfix/* ]
 
+env:
+  DOCKER_BUILDKIT: 1
+
 jobs:
   docfx_docker_test:
     runs-on: ${{ matrix.os }}
