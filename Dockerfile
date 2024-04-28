@@ -6,6 +6,7 @@ ENV PATH="${PATH}:/root/.dotnet/tools"
 # Install DocFX as a dotnet tool.
 RUN dotnet tool update -g docfx && \
     DOCFX_VERSION=$(docfx --version | cut -d '+' -f1) && \
+    rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net6.0                        && \
     rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net7.0                        && \
     rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/darwin-arm64 && \
     rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/darwin-x64   && \
@@ -13,6 +14,7 @@ RUN dotnet tool update -g docfx && \
     rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/win32_x64    && \
     rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.nupkg                         && \
     rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.${DOCFX_VERSION}.nupkg        && \
+    dotnet nuget locals all --clear && \
     docfx --version
 
 # Install dependences for chromium PDF.
