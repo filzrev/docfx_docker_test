@@ -7,6 +7,11 @@ ENV PATH="${PATH}:/root/.dotnet/tools"
 RUN dotnet tool update -g docfx && \
     docfx --version
 
+# Remove unused files to reduce image size
+RUN apt install tree
+
+RUN which docfx
+
 # Install dependences for chromium PDF.
 RUN apt-get update -qq && \
     apt-get install -y -qq --no-install-recommends \
@@ -19,3 +24,4 @@ WORKDIR /opt/prj
 VOLUME [ "/opt/prj" ]
 
 ENTRYPOINT [ "docfx" ]
+CMD []
