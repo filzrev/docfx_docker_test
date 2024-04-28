@@ -8,7 +8,6 @@ on:
 jobs:
   docfx_docker_test:
     runs-on: ${{ matrix.os }}
-    environment: ci
     strategy:
       fail-fast: false
       matrix:
@@ -24,7 +23,7 @@ jobs:
       # Build docker image
       - run: >-
           docker buildx build
-          --platform linux/x64
+          --platform linux/x64,darwin-arm64
           --tag docfx:latest
           ./
     

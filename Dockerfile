@@ -1,12 +1,12 @@
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim
+FROM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim
 
 # Add dotnet tools to path.
 ENV PATH="${PATH}:/root/.dotnet/tools"
 
 # Install DocFX as a dotnet tool.
 RUN dotnet tool update -g docfx && \
-    echo $TARGETPLATFORM && \
-    echo $BUILDPLATFORM && \
+    echo TARGETPLATFORM: $TARGETPLATFORM && \
+    echo BUILDPLATFORM: $BUILDPLATFORM && \
     DOCFX_VERSION=$(docfx --version | cut -d '+' -f1) && \
     rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.nupkg                         && \
     rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.${DOCFX_VERSION}.nupkg        && \
