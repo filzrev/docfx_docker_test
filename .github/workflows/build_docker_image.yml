@@ -6,7 +6,7 @@ on:
     branches: [ main, feature/*, hotfix/* ]
 
 jobs:
-  test:
+  docfx_docker_test:
     runs-on: ${{ matrix.os }}
     environment: ci
     strategy:
@@ -23,9 +23,7 @@ jobs:
           docker build ./ -t docfx
     
       # Output docker image size
-      - run: |
-          dir /home/runner/.nuget/packages/
-          du -sh /home/runner/.nuget/packages/
+      - run:
           docker images
 
       # Run docfx command
