@@ -24,4 +24,7 @@ jobs:
         docker build ./ -t docfx
 
     - run: |
+        docker images
+
+    - run: |
         docker run docfx --help

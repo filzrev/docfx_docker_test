@@ -6,8 +6,8 @@ ENV PATH="${PATH}:/root/.dotnet/tools"
 # Install DocFX as a dotnet tool.
 RUN dotnet tool update -g docfx && \
     DOCFX_VERSION=$(docfx --version | cut -d '@' -f1) && \
-    rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net6.0 && \
-    rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net7.0 && \
+    rm -rf -v /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net6.0 && \
+    rm -rf -v /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net7.0 && \
     docfx --version
 
 # Install dependences for chromium PDF.
