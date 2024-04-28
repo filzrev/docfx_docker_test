@@ -25,15 +25,11 @@ jobs:
 
     - run: |
         docker images
-    
-    - run: |
-        dir
 
     - run: >-
         docker run
         --name docfx
         --rm
-        --workdir ${{ github.workspace }}
         --volume ${{ github.workspace }}:/opt/prj
         docfx build && docfx pdf
 
