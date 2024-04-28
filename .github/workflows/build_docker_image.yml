@@ -18,6 +18,9 @@ jobs:
       # Checkout
       - uses: actions/checkout@v4
 
+      # Install QEMU
+      -run: docker run --privileged --rm tonistiigi/binfmt --install all
+
       # Build docker image
       - run: >-
           docker buildx build
