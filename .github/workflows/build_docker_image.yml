@@ -27,4 +27,5 @@ jobs:
         docker images
 
     - run: |
-        docker run docfx --help
+        docker run docfx build && docfx pdf
+        
