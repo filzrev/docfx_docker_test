@@ -27,7 +27,8 @@ jobs:
         docker images
 
     - run: |
-        docker run docfx build && docfx pdf
+        docker run docfx build && docfx pdf -v ${PWD}:/opt/prj
+
     - uses: actions/upload-artifact@v4
       if: ${{ matrix.os == 'ubuntu-latest' }}
       with:
