@@ -1,7 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim
-
-ARG TARGETPLATFORM
-ARG BUILDPLATFORM
+FROM --platform=$TARGETPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim
 
 # Add dotnet tools to path.
 ENV PATH="${PATH}:/root/.dotnet/tools"
