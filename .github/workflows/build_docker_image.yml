@@ -24,7 +24,8 @@ jobs:
     
       # Output docker image size
       - run: |
-          dotnet nuget locals all --list
+          dir /home/runner/.nuget/packages/
+          du -sh /home/runner/.nuget/packages/
           docker images
 
       # Run docfx command
