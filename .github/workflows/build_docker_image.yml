@@ -1,4 +1,4 @@
-name: ci
+name: Build docker image and run docfx
 on:
   pull_request_target:
     branches: [ main, feature/*, hotfix/* ]
@@ -14,27 +14,29 @@ jobs:
       matrix:
         os: [ ubuntu-latest ]
     steps:
-    - uses: actions/checkout@v4
-      with:
-        ref: ${{github.event.pull_request.head.ref}}
-        repository: ${{ github.event.pull_request.head.repo.full_name }}
-        lfs: true
 
-    - run: |
-        docker build ./ -t docfx
+      # Checkout
+      - uses: actions/checkout@v4
 
-    - run: |
-        docker images
+      # Build docker image
+      - run:
+          docker build ./ -t docfx
+    
+      # Output docker image size
+      - run:
+          docker images
 
-    - run: >-
-        docker run
-        --name docfx
-        --rm
-        --volume ${{ github.workspace }}:/opt/prj
-        docfx docs/docfx.json
-
-    - uses: actions/upload-artifact@v4
-      if: ${{ matrix.os == 'ubuntu-latest' }}
-      with:
-        name: site
-        path: docs/_site/toc.pdf
+      # Run docfx command
+      - run: >-
+          docker run
+          --name docfx
+          --rm
+          --volume ${{ github.workspace }}:/opt/prj
+          docfx docs/docfx.json
+    
+      # Upload site artifacts
+      - uses: actions/upload-artifact@v4
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        with:
+          name: site
+          path: docs/_site/*
