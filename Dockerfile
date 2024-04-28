@@ -8,10 +8,11 @@ RUN dotnet tool update -g docfx && \
     DOCFX_VERSION=$(docfx --version | cut -d '+' -f1) && \
     rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net6.0                        && \
     rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net7.0                        && \
-    rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/darwin-arm64 && \
-    rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/darwin-x64   && \
-    rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-arm64  && \
-    rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/win32_x64    && \
+    if [ "$TARGETPLATFORM" != "darwin-arm64" ]; then rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/darwin-arm64 ; fi && \
+    if [ "$TARGETPLATFORM" != "darwin-x64 " ];  then rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/darwin-x64   ; fi && \
+    if [ "$TARGETPLATFORM" != "linux-amd64" ];  then rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-amd64  ; fi && \
+    if [ "$TARGETPLATFORM" != "linux-arm64" ];  then rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-arm64  ; fi && \
+    if [ "$TARGETPLATFORM" != "win32_x64" ];    then rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/win32_x64    ; fi && \
     rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.nupkg                         && \
     rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.${DOCFX_VERSION}.nupkg        && \
     pwsh -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any/playwright.ps1 install chromium && \
