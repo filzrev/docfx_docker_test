@@ -20,9 +20,9 @@ jobs:
 
       # Enable multi-platform build
       - run: |
-          docker buildx create --use --name multi-arch --platform linux/amd64,linux/arm64
+          # docker buildx create --use --name multi-arch --platform linux/amd64,linux/arm64
           docker buildx ls
-          docker buildx inspect --builder multi-arch --bootstrap
+          #docker buildx inspect --builder multi-arch --bootstrap
 
       # Checkout
       - uses: actions/checkout@v4
