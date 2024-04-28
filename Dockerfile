@@ -19,6 +19,7 @@ RUN dotnet tool install -g docfx && \
     if [ "$TARGETPLATFORM" != "linux/arm64" ];  then rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-arm64  ; fi && \
     if [ "$TARGETPLATFORM" != "linux/amd64" ];  then rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-x64    ; fi && \
     if [ "$TARGETPLATFORM" != "win32_x64" ];    then rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/win32_x64    ; fi && \
+    # pwsh -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any/playwright.ps1 install chromium && \
     docfx --version
 
 # Install dependences for chromium PDF.
