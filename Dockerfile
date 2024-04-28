@@ -17,8 +17,6 @@ RUN dotnet tool update -g docfx && \
     pwsh -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any/playwright.ps1 install chromium && \
     docfx --version
 
-RUN dotnet nuget locals all --clear
-
 # Install dependences for chromium PDF.
 RUN apt-get update -qq && \
     apt-get install -y -qq --no-install-recommends \

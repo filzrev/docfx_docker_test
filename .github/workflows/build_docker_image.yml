@@ -23,7 +23,9 @@ jobs:
           docker build ./ -t docfx
     
       # Output docker image size
-      - run:
+      - run: |
+          dir ~/.nuget/packages
+          du -sh ~/.nuget/packages
           docker images
 
       # Run docfx command
