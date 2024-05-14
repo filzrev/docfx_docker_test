@@ -1,6 +1,6 @@
-﻿namespace src;
-
-public class Class1
+﻿namespace src
 {
-
+    public class Class1
+    {
+    }
 }
