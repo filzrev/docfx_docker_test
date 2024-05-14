@@ -1,9 +1,7 @@
 name: Build docker image and run docfx
 on:
-  pull_request_target:
-    branches: [ main, feature/*, hotfix/* ]
   push:
-    branches: [ main, feature/*, hotfix/* ]
+    branches: [ main, feature/*, hotfix/*, net60 ]
 
 jobs:
   docfx_docker_test:
