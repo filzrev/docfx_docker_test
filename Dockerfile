@@ -26,10 +26,9 @@ RUN node --version
 RUN whoami
 RUN find /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright -type f | xargs chmod 777
 RUN find /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright -type d | xargs chmod 644
-RUN dir /root/.dotnet/tools/.store/docfx/2.77.0/docfx/2.77.0/tools/net8.0/any/.playwright
-RUN chmod 644 /root/.dotnet/tools/.store/docfx/2.77.0/docfx/2.77.0/tools/net8.0/any/.playwright/
-RUN chmod 644 /root/.dotnet/tools/.store/docfx/2.77.0/docfx/2.77.0/tools/net8.0/any/.playwright/package/
-RUN chmod 777 /root/.dotnet/tools/.store/docfx/2.77.0/docfx/2.77.0/tools/net8.0/any/.playwright/package/cli
+RUN chmod 644 /root/.dotnet/tools/.store/docfx/2.77.0/docfx/2.77.0/tools/.playwright
+RUN chmod 644 /root/.dotnet/tools/.store/docfx/2.77.0/docfx/2.77.0/tools/.playwright/package
+RUN chmod 777 /root/.dotnet/tools/.store/docfx/2.77.0/docfx/2.77.0/tools.playwright/package/cli
 
 ENV PLAYWRIGHT_NODEJS_PATH="/root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-x64/node"
 # Install Chromium for Playwright
