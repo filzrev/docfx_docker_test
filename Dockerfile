@@ -1,31 +1,23 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim
 
-ARG TARGETPLATFORM
-
 # Add dotnet tools to path.
 ENV PATH="${PATH}:/root/.dotnet/tools"
 
+# Set target docfx version.
+ARG DOCFX_VERSION=2.77.0
+
 # Install DocFX as a dotnet tool.
-RUN dotnet tool install -g docfx && \
-    echo TARGETPLATFORM: $TARGETPLATFORM && \
-    echo BUILDPLATFORM: $BUILDPLATFORM && \
-    DOCFX_VERSION=$(docfx --version | cut -d '+' -f1) && \
+RUN dotnet tool install docfx -g --version ${DOCFX_VERSION} && \
+    docfx --version && \
     rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.nupkg                         && \
     rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.${DOCFX_VERSION}.nupkg        && \
     rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net6.0                        && \
-    rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net7.0                        && \
-    # pwsh -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any/playwright.ps1 install chromium && \
-    docfx --version
+    pwsh -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any/playwright.ps1 install chromium
 
-    #if [ "$TARGETPLATFORM" != "darwin-arm64" ]; then rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/darwin-arm64 ; fi && \
-    #if [ "$TARGETPLATFORM" != "darwin-x64 " ];  then rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/darwin-x64   ; fi && \
-    #if [ "$TARGETPLATFORM" != "linux/arm64" ];  then rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-arm64  ; fi && \
-    #if [ "$TARGETPLATFORM" != "linux/amd64" ];  then rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-x64    ; fi && \
-    #if [ "$TARGETPLATFORM" != "win32_x64" ];    then rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/win32_x64    ; fi && \
-
-# Install dependences for chromium PDF.
+# Install Node.js and dependences for chromium PDF.
 RUN apt-get update -qq && \
     apt-get install -y -qq --no-install-recommends \
+    nodejs \
     libglib2.0-0 libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 \
     libdbus-1-3 libxcb1 libxkbcommon0 libatspi2.0-0 libx11-6 libxcomposite1 libxdamage1 \
     libxext6 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2 && \
