@@ -6,6 +6,14 @@ ENV PATH="${PATH}:/root/.dotnet/tools"
 # Set target docfx version.
 ARG DOCFX_VERSION=2.77.0
 
+# Install DocFX as a dotnet tool.
+RUN dotnet tool install docfx -g --version ${DOCFX_VERSION} && \
+    docfx --version && \
+    rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.nupkg                         && \
+    rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.${DOCFX_VERSION}.nupkg        && \
+    rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net6.0                        && \
+    pwsh -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any/playwright.ps1 install chromium
+
 # Install Node.js and dependences for chromium PDF.
 RUN apt-get update -qq && \
     apt-get install -y -qq --no-install-recommends \
@@ -15,13 +23,8 @@ RUN apt-get update -qq && \
     libxext6 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2 && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-# Install DocFX as a dotnet tool.
-RUN dotnet tool install docfx -g --version ${DOCFX_VERSION} && \
-    docfx --version && \
-    rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.nupkg                         && \
-    rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.${DOCFX_VERSION}.nupkg        && \
-    rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net6.0                        && \
-    pwsh -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any/playwright.ps1 install chromium
+# Install Chromium
+RUN pwsh -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any/playwright.ps1 install chromium
 
 WORKDIR /opt/prj
 VOLUME [ "/opt/prj" ]
