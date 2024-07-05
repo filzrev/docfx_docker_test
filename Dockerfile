@@ -25,9 +25,7 @@ RUN apt-get update -qq && \
 RUN node --version
 RUN whoami
 RUN find /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright -type f | xargs chmod 777
-RUN ls -l /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-x64/node
-RUN chmod +x /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/*/node
-RUN ls -l /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-x64/node
+RUN find /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright -type d | xargs chmod 644
 
 ENV PLAYWRIGHT_NODEJS_PATH="/root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-x64/node"
 # Install Chromium for Playwright
