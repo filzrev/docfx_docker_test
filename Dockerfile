@@ -15,15 +15,12 @@ RUN apt-get update -qq && \
     libxext6 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2 && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-ENV PLAYWRIGHT_NODEJS_PATH="/usr/bin/node"
+# ENV PLAYWRIGHT_NODEJS_PATH="/usr/bin/node"
 
 # Install DocFX as a dotnet tool.
-RUN dotnet tool install docfx -g --version ${DOCFX_VERSION} && \
-    docfx --version && \
-    rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.nupkg                         && \
-    rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.${DOCFX_VERSION}.nupkg        && \
-    rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net6.0 && \
+RUN dotnet tool update -g docfx && \
     pwsh -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any/playwright.ps1 install chromium && \
+    docfx --version
 
 WORKDIR /opt/prj
 VOLUME [ "/opt/prj" ]
