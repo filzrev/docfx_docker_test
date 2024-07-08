@@ -8,6 +8,7 @@ ARG DOCFX_VERSION=2.77.0
 
 # Install Node.js and dependences for chromium PDF.
 RUN apt-get update -qq && \
+    curl -sL https://deb.nodesource.com/setup_12.x | bash - \
     apt-get install -y -qq --no-install-recommends \
     nodejs \
     libglib2.0-0 libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 \
