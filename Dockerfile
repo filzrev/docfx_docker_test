@@ -19,6 +19,7 @@ ENV PLAYWRIGHT_NODEJS_PATH="/usr/bin/node"
 
 # Install DocFX as a dotnet tool.
 RUN dotnet tool update -g docfx && \
+    cd /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any && \
     pwsh -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any/playwright.ps1 install chromium && \
     docfx --version
 
