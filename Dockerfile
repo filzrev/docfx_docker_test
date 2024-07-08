@@ -23,7 +23,7 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 ENV PLAYWRIGHT_NODEJS_PATH="/usr/bin/node"
-RUN pwsh pwsh -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/playwright.ps1 install chromium
+RUN pwsh -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/playwright.ps1 install chromium
 
 WORKDIR /opt/prj
 VOLUME [ "/opt/prj" ]
