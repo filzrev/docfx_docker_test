@@ -9,7 +9,6 @@ ARG DOCFX_VERSION=2.77.0
 # Install DocFX as a dotnet tool.
 RUN dotnet tool install docfx -g --version ${DOCFX_VERSION} && \
     docfx --version && \
-    rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.nupkg                         && \
     rm  -f /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/docfx.${DOCFX_VERSION}.nupkg        && \
     rm -rf /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net6.0
 
@@ -22,18 +21,7 @@ RUN apt-get update -qq && \
     libxext6 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2 && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-RUN node --version
-RUN whoami
-RUN find /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright -type f | xargs chmod 777
-RUN find /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright -type d | xargs chmod 644
-RUN chmod 644 /root/.dotnet/tools/.store/docfx/2.77.0/docfx/2.77.0/tools/.playwright
-RUN chmod 644 /root/.dotnet/tools/.store/docfx/2.77.0/docfx/2.77.0/tools/.playwright/package
-RUN chmod 777 /root/.dotnet/tools/.store/docfx/2.77.0/docfx/2.77.0/tools/.playwright/package/cli.js
-
-ENV PLAYWRIGHT_NODEJS_PATH="/root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-x64/node"
-# Install Chromium for Playwright
-RUN $env:PLAYWRIGHT_NODEJS_PATH="/root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-x64/node" && \
-    pwsh -ExecutionPolicy RemoteSigned -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any/playwright.ps1 install chromium
+RUN dir /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}
 
 WORKDIR /opt/prj
 VOLUME [ "/opt/prj" ]
