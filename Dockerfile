@@ -6,11 +6,12 @@ ENV PATH="${PATH}:/root/.dotnet/tools"
 # Set target docfx version.
 ARG DOCFX_VERSION=2.77.0
 
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
+RUN apt-get install -y nodejs
+
 # Install Node.js and dependences for chromium PDF.
 RUN apt-get update -qq && \
-    curl -sL https://deb.nodesource.com/setup_12.x | bash - \
     apt-get install -y -qq --no-install-recommends \
-    nodejs \
     libglib2.0-0 libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 \
     libdbus-1-3 libxcb1 libxkbcommon0 libatspi2.0-0 libx11-6 libxcomposite1 libxdamage1 \
     libxext6 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2 && \
