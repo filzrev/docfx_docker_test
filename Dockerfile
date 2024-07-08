@@ -28,7 +28,7 @@ RUN find /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION
 RUN find /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright -type d | xargs chmod 644
 RUN chmod 644 /root/.dotnet/tools/.store/docfx/2.77.0/docfx/2.77.0/tools/.playwright
 RUN chmod 644 /root/.dotnet/tools/.store/docfx/2.77.0/docfx/2.77.0/tools/.playwright/package
-RUN chmod 777 /root/.dotnet/tools/.store/docfx/2.77.0/docfx/2.77.0/tools/.playwright/package/cli
+RUN chmod 777 /root/.dotnet/tools/.store/docfx/2.77.0/docfx/2.77.0/tools/.playwright/package/cli.js
 
 ENV PLAYWRIGHT_NODEJS_PATH="/root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-x64/node"
 # Install Chromium for Playwright
