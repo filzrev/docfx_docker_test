@@ -21,6 +21,7 @@ RUN apt-get update -qq && \
     libxext6 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2 && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
+RUN which node
 RUN dir /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}
 
 WORKDIR /opt/prj
