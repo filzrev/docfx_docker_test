@@ -32,7 +32,8 @@ RUN chmod 777 /root/.dotnet/tools/.store/docfx/2.77.0/docfx/2.77.0/tools/.playwr
 
 ENV PLAYWRIGHT_NODEJS_PATH="/root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-x64/node"
 # Install Chromium for Playwright
-RUN pwsh -ExecutionPolicy RemoteSigned -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any/playwright.ps1 install chromium
+RUN $env:PLAYWRIGHT_NODEJS_PATH="/root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright/node/linux-x64/node" && \
+    pwsh -ExecutionPolicy RemoteSigned -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any/playwright.ps1 install chromium
 
 WORKDIR /opt/prj
 VOLUME [ "/opt/prj" ]
