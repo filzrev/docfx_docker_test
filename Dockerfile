@@ -21,9 +21,9 @@ RUN apt-get update -qq && \
     libdbus-1-3 libxcb1 libxkbcommon0 libatspi2.0-0 libx11-6 libxcomposite1 libxdamage1 \
     libxext6 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2 && \
     rm -rf /var/lib/apt/lists/* /tmp/*
-
-# ENV PLAYWRIGHT_NODEJS_PATH="/usr/bin/node"
-RUN PLAYWRIGHT_NODEJS_PATH="/usr/bin/node"
+    
+# Install Chromium.
+RUN PLAYWRIGHT_NODEJS_PATH="/usr/bin/node" && \
     ln -s /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/.playwright /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any/.playwright && \
     pwsh -File /root/.dotnet/tools/.store/docfx/${DOCFX_VERSION}/docfx/${DOCFX_VERSION}/tools/net8.0/any/playwright.ps1 install chromium
 
