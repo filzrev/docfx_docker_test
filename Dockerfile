@@ -15,7 +15,7 @@ RUN apt-get update -qq && \
     libxext6 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2 && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-# ENV PLAYWRIGHT_NODEJS_PATH="/usr/bin/node"
+ENV PLAYWRIGHT_NODEJS_PATH="/usr/bin/node"
 
 # Install DocFX as a dotnet tool.
 RUN dotnet tool update -g docfx && \
